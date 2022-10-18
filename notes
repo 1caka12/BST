@@ -1,0 +1,46 @@
+S2 group - 8 people
+Information management, Software engineering processes,software design
+Where is software today? Still not everywhere; modern cars - basically computers on cars
+medical apps, gps, space applications
+How big is software - average 2010 ford auto had 10m lines of code, 20m navigation system in 2009 s-class mercedes benz
+world of warcraft 5.5 milion lines
+google 2 billion lines of code
+100m average luxury auto,1.7m us air force f-22 raptor jet, 6.5m boeing 78 dreamliner
+To design software - software development has to be a systematic activity
+Quality assurance- we have to verify and validate our SW in order to make it something people can rely on
+Abstraction- the principal instrument for managing complexity
+Responsibly creating applications -for cars for instance 
+software systems deal with: large and complex, built by teams, exist in many versions, last many years, undergo changes
+software crisis 1970 - every project was overbudget and never delivered; people writing the code weren't actual developers since there was no formal education, they were creative
+Why software changes: it needs to be fixed, our needs change
+Disciplines in software engneering: software requirements, design,construction, architecture, maintenance, configuration management, engineering management, engineering process
+software engineering body of knowledge: book of terms 
+Difference between computer science and software engineering:
+-Computability, algorithms and complexity, programming languages, data structures, databases, artificial intelligence
+Software engineering
+The application of computer science, mathematics, project management to build high quality software
+Building code from models
+Software qualities- felyx/check apps
+correctness,robustness,performance,usability,reusability
+correctness - if it satisfies the functional requirement specifications - assuming that specification exists
+If specifications are formal, since programs are formal objects, correctness can be defined formally - it can be proven as a theorem or disproved by counterexamples(testing)
+Robustness - software behaves reasonably even in unforeseen circumstances (e.g. incorrect input, hardware failure) - improved by - software monitoring, defensive programming; robustness can be achieved by monitoring if the services run
+Self adaptive system - needs to be aware of its state and what is happening
+Efficient use of resources - memory, processing time, communication; can be evaluated : alogrithms complexity, measurement of the implemeneted system
+Performance can affect scalability: e.g. a solution that works on a small local network may not work on a large intranet: improved by considering it during design, small-scale code optimization
+Expected users find the system easy to use: other term: user-friendliness
+Rather subjective, difficult to evaluate
+Affected mostly by user interface: improved by user-centered design process, adaptable user interface
+Principles apply to process and product; principles become practice through methods and techniques: often methods and techniques are packaged in a methodology, methodologies can be enforced by tools;
+separation of concerns NWS
+Abstraction
+Separation of concerns: Helps you focus, encourages decoupling, supports parallelization of efforts and separation of responsibilities
+Dimensions of separation of concerns- time,size,qualities,views
+Modularity - divide into simpler pieces called modules, a system that is composed of modules is called modular
+Cohesion and coupling:
+Each module should be highly cohesive:
+-module understandable as a meaningful unit
+-components of a module are closely related to each other
+Modules should exhibit low coupling - dependencies on each other
+Agile development : What is SCRUM? TO CHECK\
+-
