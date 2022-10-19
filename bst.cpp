@@ -46,6 +46,8 @@ int BST::traverseHeight(Node* node)
 
 bool BST::traverseSearch(int num, Node* node)
 {
+    if(node == nullptr) return false;
+
     if(num == node->value) return true;
 
     if(num > node->value){ return traverseSearch(num, node->right);}
@@ -152,5 +154,5 @@ int main()
         std::cout << orderedTree.at(i) << " "; 
     }
     std::cout << std::endl;
-    std::cout << "Height of the tree: "<< tree.getHeight() ;
+    std::cout << "Height of the tree: "<< tree.getHeight() << std::endl ;
 }
