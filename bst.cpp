@@ -147,7 +147,7 @@ int main()
     std::cout << searchNum << " is in the tree: "<< isFound << std::endl;
 
     std::vector<int> orderedTree = tree.inOrder();
-    std::cout << "The numbers in sorted order: " << std::endl ;
+    std::cout << "The numbers in sorted order: ";
 
     for(int i = 0 ; i < orderedTree.size(); i++)
     {
