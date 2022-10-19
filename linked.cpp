@@ -51,7 +51,7 @@ int main() {
    lastObj = headObj;
    
    for (i = 0; i < 5; ++i) {        // Append 20 rand nums
-      currObj = new IntNode(rand());
+      currObj = new IntNode(i);
       
       lastObj->InsertAfter(currObj); // Append curr
       lastObj = currObj;             // Curr is the new last item
