@@ -122,7 +122,7 @@ std::vector<int> BST::inOrder()
 
 int main()
 {
-    std::cout << "Enter the numbers to be stored(end with a letter): ";
+    std::cout << "Enter the numbers to be stored(end with a letter): " << std::endl;
 
     BST tree;
     int num;
@@ -138,7 +138,7 @@ int main()
     int searchNum;
     std::string isFound = "No";
     
-    std::cout << "Which number do you want to look up? ";
+    std::cout << "Which number do you want to look up? " << std::endl;
     std::cin >> searchNum;
     if(tree.hasKey(searchNum))
     {
@@ -147,7 +147,7 @@ int main()
     std::cout << searchNum << " is in the tree: "<< isFound << std::endl;
 
     std::vector<int> orderedTree = tree.inOrder();
-    std::cout << "The numbers in sorted order: ";
+    std::cout << "The numbers in sorted order: " << std::endl ;
 
     for(int i = 0 ; i < orderedTree.size(); i++)
     {
