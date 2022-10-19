@@ -9,14 +9,14 @@ public:
     Node *left;
     Node(){left = nullptr; right = nullptr;}
     Node(int num){value = num ; left = nullptr; right = nullptr;}
-    ~Node(){delete right,left;}
+    ~Node();
 };
 
 class BST
 {
 public:
     BST(){ root = nullptr;}
-    ~BST(){delete root;}
+    ~BST(){ deleteBST(root);}
     void insertKey(int newKey);
     bool hasKey(int searchKey);
     std::vector<int> inOrder();
@@ -28,8 +28,20 @@ private:
     void traverseInOrder(Node* node);
     void traverseInsert(int num, Node* node);
     bool traverseSearch(int num, Node* node);
-  
+    void deleteBST(Node* node);
 };
+void BST::deleteBST(Node* node)
+{
+    if(node == nullptr)
+    {
+        return;
+    }
+
+    deleteBST(node->left);
+    deleteBST(node->right);
+
+    delete node;
+}
 
 int BST::traverseHeight(Node* node)
 {
@@ -40,7 +52,6 @@ int BST::traverseHeight(Node* node)
 
     int leftHeight = traverseHeight(node->left);
     int rightHeight = traverseHeight(node->right);
-
     return (leftHeight<rightHeight) ? rightHeight+1 : leftHeight+1;
 }
 
