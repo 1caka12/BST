@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <sstream>
 
 class Node
 {
@@ -21,11 +20,11 @@ public:
     void insertKey(int newKey);
     bool hasKey(int searchKey);
     std::vector<int> inOrder();
-    int getHeight();
+    int getHeight(){ return traverseHeight(root);}
 private:
     Node* root;
     std::vector<int> orderedTree;
-    int traverseHeight(Node* node) { return traverseHeight(root);}
+    int traverseHeight(Node* node);
     void traverseInOrder(Node* node);
     void traverseInsert(int num, Node* node);
     bool traverseSearch(int num, Node* node);
@@ -97,7 +96,7 @@ void BST::insertKey(int newKey)
 
 void BST::traverseInOrder(Node* node)
 {
-    if(node->left == nullptr && node->right == nullptr)
+    if(node == nullptr)
     {
         orderedTree.push_back(node->value);
         return;
@@ -107,7 +106,7 @@ void BST::traverseInOrder(Node* node)
 
     orderedTree.push_back(node->value);
  
-    if(node->right != nullptr) { traverseInOrder(node->right);}
+    if(node->right != nullptr){ traverseInOrder(node->right);}
 }
 std::vector<int> BST::inOrder()
 {
@@ -118,21 +117,21 @@ std::vector<int> BST::inOrder()
     traverseInOrder(root);
     return orderedTree;
 }
+
 int main()
 {
-    std::istringstream inputStream;
-    std::string input;
-
     std::cout << "Enter the numbers to be stored(end with a letter): ";
-    getline(std::cin,input);
-    inputStream.str(input);
+
     BST tree;
     int num;
-
-    while (inputStream >> num)
+    std::cin >> num;
+    while (!std::cin.fail())
     {
         tree.insertKey(num);
+        std::cin >> num;
     }
+    std::cin.clear();
+    std::cin.ignore(1000, '\n');
 
     int searchNum;
     std::string isFound = "No";
