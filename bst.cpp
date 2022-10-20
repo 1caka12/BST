@@ -214,16 +214,6 @@ int main()
     std::cin.clear();
     std::cin.ignore(1000, '\n');
 
-    int searchNum;
-    std::string isFound = "no";
-    
-    std::cout << "Which number do you want to look up? " << std::endl;
-    std::cin >> searchNum;
-    if(tree.hasKey(searchNum)){ isFound = "yes";}
-       
-   
-    std::cout << searchNum << " is in the tree: "<< isFound << std::endl;
-
     std::vector<int> orderedTree = tree.inOrder();
     std::cout << "The numbers in sorted order: ";
 
@@ -231,7 +221,6 @@ int main()
     {
         std::cout << orderedTree.at(i) << " "; 
     }
-    std::cout << std::endl;
-    std::cout << "Height of the tree: "<< tree.getHeight() << std::endl;
+
     tree.prettyPrint();
 }
