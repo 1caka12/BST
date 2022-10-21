@@ -21,102 +21,65 @@ public:
     bool hasKey(int searchKey);
     std::vector<int> inOrder();
     int getHeight(){ return traverseHeight(root);}
-    void prettyPrint();
+    void balance();
+    void removeKey(int oldKey);
 private:
     Node* root;
     std::vector<int> orderedTree;
-    std::vector<std::vector<std::string>> tree;
     int traverseHeight(Node* node);
     void traverseInOrder(Node* node);
     void traverseInsert(int num, Node* node);
     bool traverseSearch(int num, Node* node);
     void deleteBST(Node* node);
-    void getTree();
-    void initializeTreeVector();
-    void printCeiling();
-    int getDistanceToNode(Node* node, int searchKey);
 };
-int BST::getDistanceToNode(Node* node, int searchKey)
+
+void BST::removeKey(int oldKey)
 {
-    if(root == nullptr) return 0;
+    if(!hasKey(oldKey))
+    {
+        std::cout << "Key not found" << std::endl;
+        return;
+    }
 
-    if(searchKey == node->value) return 0;
-
-    int distance = 0;
-
-    if(searchKey> node->value){ distance = getDistanceToNode(node->right, searchKey);}
-    else if(searchKey< node->value){ distance = getDistanceToNode(node ->left, searchKey);}
-
-    return distance+1;
-}
-
-void BST::initializeTreeVector()
-{
-    std::vector<std::string> row(getHeight(), "e");
-    std::vector<std::vector<std::string>> tree(orderedTree.size(),row);
-    this->tree = tree;
-}
-void BST::getTree()
-{
-    initializeTreeVector();
     for(int i = 0 ; i < orderedTree.size(); i++)
     {
-        int column = i;
-        int row = getDistanceToNode(root, orderedTree.at(i));
-        tree.at(column).at(row) = std::to_string(orderedTree.at(i));
-    }
-}
-void BST::printCeiling()
-{
-    for(int i = 0 ; i < orderedTree.size(); i++)
-    {
-        std::cout << "-----";
-    }
-    std::cout<< '-';
-    std::cout << std::endl;
-}
-void BST::prettyPrint()
-{
-    if(root == nullptr) return;
-    getTree();
-    printCeiling();
-
-    for(int i = 0 ; i < getHeight(); i++)
-    {
-        for(int j = 0 ; j <orderedTree.size(); j++)
+        if(orderedTree.at(i) == oldKey)
         {
-           std::cout << "|";
-           if(tree.at(j).at(i) != "e")
-           {    
-                int num = std::stoi(tree.at(j).at(i));
-                if(num > 99 || num < -99)
-                {
-                    std::cout << num;
-                }
-                else if(num < -9)
-                {
-                    std::cout<<" "<< num;
-                }
-                else if(num > 9 || num < 0)
-                {
-                    std::cout << "  "<< num;
-                }
-                else
-                {
-                    std::cout << "   "<<num;
-                }
-           }
-           else{ std::cout << "    ";}
+            orderedTree.erase(orderedTree.begin()+i);
+            break;
         }
-        std::cout << "|";
-        std::cout << std::endl;
-        printCeiling();
     }
+    balance();
+}
+void BST::balance()
+{
+    int mid = (orderedTree.size()-1)/2;
+    Node* newRoot = new Node(orderedTree.at(mid));
 
+    for(int i = mid ; i >= 0 ; i--)
+    {
+        if(orderedTree.at(i) == orderedTree.at(mid))
+        {
+            continue;
+        }
+        traverseInsert(orderedTree.at(i), newRoot);
+    }
+    for(int i = mid ; i < orderedTree.size() ; i++)
+    {
+        if(orderedTree.at(i) == orderedTree.at(mid))
+        {
+            continue;
+        }
+        traverseInsert(orderedTree.at(i), newRoot);
+    }
+    root = newRoot;
 }
 void BST::deleteBST(Node* node)
 {
-    if(node == nullptr) return;
+    if(node == nullptr)
+    {
+        return;
+    }
 
     deleteBST(node->left);
     deleteBST(node->right);
@@ -126,11 +89,13 @@ void BST::deleteBST(Node* node)
 
 int BST::traverseHeight(Node* node)
 {
-    if(node == nullptr) return 0;
+    if(node == nullptr)
+    {
+        return 0;
+    }
 
     int leftHeight = traverseHeight(node->left);
     int rightHeight = traverseHeight(node->right);
-
     return (leftHeight<rightHeight) ? rightHeight+1 : leftHeight+1;
 }
 
@@ -202,15 +167,17 @@ void BST::traverseInOrder(Node* node)
 }
 std::vector<int> BST::inOrder()
 {
-    if(root == nullptr) return orderedTree;
-
+    if(root == nullptr)
+    {
+        return orderedTree;
+    }
     traverseInOrder(root);
     return orderedTree;
 }
 
 int main()
 {
-    std::cout << "Enter the numbers to be stored: " << std::endl;
+    std::cout << "Enter the numbers to be stored (end with a letter): " << std::endl;
 
     BST tree;
     int num;
@@ -223,13 +190,27 @@ int main()
     std::cin.clear();
     std::cin.ignore(1000, '\n');
 
+    int searchNum;
+    std::string isFound = "no";
+    
+    std::cout << "Which number do you want to look up? " << std::endl;
+    std::cin >> searchNum;
+    if(tree.hasKey(searchNum))
+    {
+       isFound = "yes";
+    }
+    std::cout << searchNum << " is in the tree: "<< isFound << std::endl;
+
     std::vector<int> orderedTree = tree.inOrder();
-    std::cout <<"The numbers in sorted order: ";
+    std::cout << "The numbers in sorted order: ";
+
     for(int i = 0 ; i < orderedTree.size(); i++)
     {
         std::cout << orderedTree.at(i) << " "; 
     }
     std::cout << std::endl;
+    std::cout << "Height of the tree: "<< tree.getHeight();
 
-    tree.prettyPrint();
+    tree.balance();
+    tree.removeKey(4);
 }
