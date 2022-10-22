@@ -2,17 +2,15 @@
 #include <vector>
 #include "bst.h"
 
-void printTree(BST tree)
+void printInOrder(std::vector<int> orderedTree)
 {
-    std::vector<int> orderedTree = tree.inOrder();
     std::cout <<"The numbers in sorted order: ";
+
     for(int i = 0 ; i < orderedTree.size(); i++)
     {
         std::cout << orderedTree.at(i) << " "; 
     }
     std::cout << std::endl;
-
-    tree.prettyPrint();
 }
 BST getInput()
 {
@@ -32,5 +30,8 @@ BST getInput()
 int main()
 {
     BST tree = getInput();
-    printTree(tree);
+    printInOrder(tree.inOrder());
+    tree.prettyPrint();
+
+    return 0;
 }
